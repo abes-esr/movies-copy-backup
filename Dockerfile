@@ -6,4 +6,5 @@ RUN echo "4    0       *       *       *       docker exec -it movies-wikibase-w
 RUN echo "5      0       *       *       *       docker restart movies-wikibase-wdqs >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
 RUN echo "6 0 * * * docker restart movies-wikibase-wdqs-updater >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
 COPY ./entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
