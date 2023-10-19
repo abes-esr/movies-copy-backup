@@ -5,7 +5,7 @@ RUN echo "3    0       *       *       *       docker exec -it movies-db-dumper 
 RUN echo "4    0       *       *       *       docker exec -it movies-wikibase-wdqs sh -c 'rm -f data/data.jnl' >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
 RUN echo "5    0       *       *       *       docker restart movies-wikibase-wdqs >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
 RUN echo "6    0       *       *       *       docker restart movies-wikibase-wdqs-updater >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
-RUN apt update && apt install tzdata -y
+RUN apk add --no-cache --update tzdata
 ENV TZ="Europe/Paris"
 COPY ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
