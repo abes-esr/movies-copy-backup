@@ -1,5 +1,4 @@
 #!/bin/sh
-export KUBECONFIG=/run/secrets/kubeconfig/kubeconfig
 oc project $PROJECT
 export DUMPER=$(oc get pods -o json | jq -r '.items[].metadata|select(.name|test("dumper")).name')
 export WDQS=$(oc get pods -o json | jq -r '.items[].metadata|select((.name|test("wdqs")) and (.name|test("frontend|proxy|updater")|not)).name')
