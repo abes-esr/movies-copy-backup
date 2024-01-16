@@ -3,7 +3,6 @@ RUN wget -q https://github.com/okd-project/okd/releases/download/4.12.0-0.okd-20
 RUN cd /usr/local/bin && tar xvzf openshift-client-linux-4.12.0-0.okd-2023-02-18-033438.tar.gz && chmod +x oc && chmod +x kubectl
 RUN rm -f openshift-client-linux-4.12.0-0.okd-2023-02-18-033438.tar.gz
 RUN apk add --update ca-certificates
-RUN mkdir /k8s
 
 ENV TZ="Europe/Paris"
 COPY ./entrypoint.sh /
