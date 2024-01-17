@@ -7,4 +7,6 @@ RUN apk add --update ca-certificates jq --no-cache
 ENV TZ="Europe/Paris"
 COPY ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
+COPY ./oc.sh
+RUN chmod +x /oc.sh
 ENTRYPOINT ["/entrypoint.sh"]
