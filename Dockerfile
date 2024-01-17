@@ -9,4 +9,6 @@ COPY ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 COPY ./oc.sh /
 RUN chmod +x /oc.sh
+COPY ./oc_cron.sh /
+RUN chmod +x /oc_cron.sh
 ENTRYPOINT ["/entrypoint.sh"]
