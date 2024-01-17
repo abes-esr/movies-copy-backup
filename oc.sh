@@ -4,7 +4,7 @@ oc project $1
 
 # usage: /oc.sh <project_name> <dumper|wdqs-jnl|wdqs-run|all> <now>
 
-if [[ "$3" == 'now']];
+if [[ "$3" == 'now' ]];
     then
         case $2 in
             dumper)
