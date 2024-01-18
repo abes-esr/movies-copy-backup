@@ -11,6 +11,11 @@ case $1 in
 	        oc exec $WDQS -- sh -c 'rm -f data/data.jnl' >/dev/null 2>&1
   		echo "$1 OK"
 		;;
+  	wdqs-restart)
+		export WDQS=$(oc get pods -o json | jq -r '.items[].metadata|select((.name|test("wdqs")) and (.name|test("frontend|proxy|updater")|not)).name')
+  		oc delete pod $WDQS
+    		echo "$1 OK"
+   		;;
 	wdqs-run)
 		export WDQS=$(oc get pods -o json | jq -r '.items[].metadata|select((.name|test("wdqs")) and (.name|test("frontend|proxy|updater")|not)).name')
 		oc exec $WDQS -- bash -c '/wdqs/runUpdate.sh -h http://$WDQS_HOST:$WDQS_PORT -- --wikibaseUrl $WIKIBASE_SCHEME://$WIKIBASE_HOST --conceptUri $WIKIBASE_SCHEME://$WIKIBASE_HOST --entityNamespaces ${WDQS_ENTITY_NAMESPACES} -s 20200501000000' | tee logfile | awk '1;/Got no real changes/{exit}'
