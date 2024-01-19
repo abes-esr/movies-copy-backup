@@ -1,4 +1,4 @@
 KUBECONFIG is the env for kubernetes config file.
-The most simple way to create an encoded passord is to create it from a file with command:
+The most simple way to create an encoded password into a secret is to create it from a file with this command:
 
- oc create secret kubeconfig --from-env-file=kuconfig.txt
+ oc create secret kubeconfig --from-env-file=kubeconfig
