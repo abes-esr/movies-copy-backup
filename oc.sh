@@ -19,6 +19,7 @@ if [[ "$3" == 'now' ]];
                 /oc_cron.sh dumper
                 /oc_cron.sh wdqs-jnl
                 /oc_cron.sh wdqs-restart
+                sleep 30
                 /oc_cron.sh wdqs-run;;
         esac
     else
