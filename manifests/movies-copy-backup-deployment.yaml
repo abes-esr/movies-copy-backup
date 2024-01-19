@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    co.elastic.logs/enabled: "true"
+    co.elastic.logs/processors.add_fields.fields.abes_appli: movies
+    co.elastic.logs/processors.add_fields.fields.abes_middleware: movies-copy-backup
+    co.elastic.logs/processors.add_fields.target: ""
+    com.centurylinklabs.watchtower.scope: movies-watchtower-scope
+    kompose.cmd: kompose convert -f movies-copy-backup.yml
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: movies-copy-backup
+  name: movies-copy-backup
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: movies-copy-backup
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        co.elastic.logs/enabled: "true"
+        co.elastic.logs/processors.add_fields.fields.abes_appli: movies
+        co.elastic.logs/processors.add_fields.fields.abes_middleware: movies-copy-backup
+        co.elastic.logs/processors.add_fields.target: ""
+        com.centurylinklabs.watchtower.scope: movies-watchtower-scope
+        kompose.cmd: kompose convert -f movies-copy-backup.yml
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/movies-docker-test-default: "true"
+        io.kompose.service: movies-copy-backup
+    spec:
+      containers:
+        - env:
+            - name: KUBECONFIG
+              value: /run/secrets/kubeconfig/kubeconfig
+            - name: PROJECT
+              value: movies-docker-beta
+          image: abesesr/movies:okd-copy-backup
+          name: movies-copy-backup
+          resources:
+            limits:
+              memory: "5368709120"
+          volumeMounts:
+            - mountPath: /run/secrets/kubeconfig
+              name: kubeconfig
+      restartPolicy: Always
+      volumes:
+        - name: kubeconfig
+          secret:
+            items:
+              - key: kubeconfig
+                path: kubeconfig
+            secretName: kubeconfig
+status: {}
