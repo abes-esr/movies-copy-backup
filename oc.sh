@@ -12,7 +12,7 @@ if [[ "$3" == 'now' ]];
             wdqs-jnl)
                 /oc_cron.sh wdqs-jnl;;
             wdqs-restart)
-                /oc_cron.sh wdqs-restart
+                /oc_cron.sh wdqs-restart;;
             wdqs-run)
                 /oc_cron.sh wdqs-run;;
             all)
