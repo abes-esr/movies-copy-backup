@@ -3,7 +3,7 @@
 case $1 in
 	dumper)
     		export DUMPER=$(oc get pods -o json | jq -r '.items[].metadata|select(.name|test("dumper")).name')
-		oc exec $DUMPER -- bash -c 'restore $(ls -t /backup_racine/prod/*.gz | head -n1) $DB_TYPE $DB_HOST $DB_NAME $DB_USER $DB_PASS 3306' >/dev/null 2>&1
+		oc exec $DUMPER -- bash -c 'restore $(ls -t /backup_racine/prod/*.gz | head -n1)  $DB01_TYPE $DB01_HOST $DB01_NAME $DB01_USER $DB01_PASS 3306' >/dev/null 2>&1
   		echo "$1 OK"
 		;;
 	wdqs-jnl)
