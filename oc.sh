@@ -1,5 +1,6 @@
 #!/bin/sh
 
+oc login $OC_URL -u $OC_USER -p $OC_PASSWD
 oc project $1
 
 # usage: /oc.sh <project_name> <dumper|wdqs-jnl|wdqs-run|all> <now>
